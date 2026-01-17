@@ -1,0 +1,164 @@
+/* index.css - global styles for Edu Track
+   Works together with Tailwind utilities (CDN) present in index.html
+*/
+
+/* -----------------------------
+   Reset & base
+   ----------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+html, body, #root {
+  height: 100%;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Cairo', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #f8fafc; /* matches Tailwind slate background used in components */
+  color: #0f172a;
+  line-height: 1.4;
+  -webkit-tap-highlight-color: transparent;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+button { font-family: inherit; }
+
+/* Ensure app uses RTL when html dir=rtl is set (index.html already sets dir="rtl") */
+html[dir="rtl"] {
+  direction: rtl;
+}
+
+/* -----------------------------
+   Container helper (used across components)
+   ----------------------------- */
+.container {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* -----------------------------
+   Form controls (sensible defaults to match design)
+   ----------------------------- */
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], textarea, select {
+  font-family: inherit;
+  border-radius: 0.75rem; /* matches rounded-xl */
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  background: #f8fafc; /* light bg like bg-gray-50 */
+  padding: 0.625rem 0.75rem;
+  outline: none;
+  transition: box-shadow 150ms ease, border-color 150ms ease, transform 80ms ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.08); /* subtle indigo ring */
+  border-color: rgba(99,102,241,0.6);
+}
+
+/* center numeric inputs used in the dashboard form */
+input[type="number"] {
+  text-align: center;
+}
+
+textarea { resize: vertical; }
+
+/* small, subtle form error style (components already use Tailwind, but fallback here) */
+.error {
+  background: #fff1f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+}
+
+/* -----------------------------
+   Buttons: base look to complement Tailwind utilities
+   ----------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+}
+.btn:active { transform: translateY(1px) scale(0.995); }
+
+/* -----------------------------
+   Footer and nav fallbacks
+   ----------------------------- */
+nav[role="navigation"], nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #ffffff;
+}
+
+footer {
+  background: #ffffff;
+}
+
+/* -----------------------------
+   Utility: subtle card style used widely
+   ----------------------------- */
+.card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.04);
+  border: 1px solid rgba(99,102,241,0.04);
+  padding: 1rem;
+}
+
+/* -----------------------------
+   Animations used in the React components
+   (classes referenced: animate-in, slide-in-from-top-2, fade-in, zoom-in)
+   ----------------------------- */
+@keyframes et-slide-in-top {
+  from { transform: translateY(-10px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes et-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes et-zoom-in {
+  from { transform: scale(0.98); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.animate-in { animation-fill-mode: both; }
+.slide-in-from-top-2 { animation: et-slide-in-top 320ms cubic-bezier(.16,1,.3,1) both; }
+.fade-in { animation: et-fade-in 200ms ease both; }
+.zoom-in { animation: et-zoom-in 240ms cubic-bezier(.16,1,.3,1) both; }
+
+/* small helpers that combination classes in components expect */
+.animate-in.slide-in-from-top-2.duration-300 { animation-duration: 300ms; }
+
+/* -----------------------------
+   Accessibility helpers
+   ----------------------------- */
+:focus { outline: none; }
+:focus-visible { outline: 3px solid rgba(99,102,241,0.18); outline-offset: 2px; }
+
+/* Touch targets and small screens improvements */
+@media (max-width: 640px) {
+  .container { padding-left: 0.75rem; padding-right: 0.75rem; }
+}
+
+/* End of index.css */
